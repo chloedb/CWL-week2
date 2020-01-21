@@ -1,7 +1,7 @@
 const readlineSync = require('readline-sync')
 
 function randomizer() {
-let peoplePerGroup = readlineSync.question('How many people do you want in each group? ');
+let peoplePerGroup = Number(readlineSync.question('How many people do you want in each group? '));
 }
 
 if (require.main === module) {

@@ -14,12 +14,12 @@ Here, we use a "process.argv" array to pass arguments
 
 #### Code sample:
 In JS file:
-    `
+   
     for (let j = 0; j < process.argv.length; j++){
         console.log(j + ' -> ' + (process.argv[j]));
     }
-    `
-
+    
 In command line:
+
 `$ node file.js tom jack 43`
 

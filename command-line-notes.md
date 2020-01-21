@@ -68,7 +68,7 @@ The output will look like this:
     Age: 45
 
 #### Features of yargs:
-- .command() : helps you create, expose, and call Node functions from the command line (refer back to website for this)
+- .command() : helps you create, expose, and call Node functions from the command line (refer back to [website](https://stackabuse.com/command-line-arguments-in-node-js/) for this)
 
 
 

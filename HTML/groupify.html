@@ -18,21 +18,11 @@
             }
             createNumInput();
         </script>
+        <br><br>
 
         Please upload file with all names:
         <br>
         <script>
-            let fileInput = $('#files');
-            let uploadButton = $('#upload');
-
-            uploadButton.on('click', function(){
-                let input = fileInput.get(0);
-                let reader = new FileReader();
-                if (input.files.length){
-                    let textFile = input.files[0];
-                    reader.readAsText(textFile);
-                }
-            })
             
         </script>
 

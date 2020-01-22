@@ -11,9 +11,28 @@ function groupify(randomizedArray, groupSizes){
     return allGroups;
 }
 
+// Note - we need to work on this function more, to proof for situations that don't work (e.g. 6, num > 7 for 14);
 function sizeGroups(totalNum, maxSize){
     let smallerSize = maxSize - 1;
-    const groupSizes = [];
+    const groupSizes = [];  
+    if (totalNum % maxSize === 0){
+        for (let i = 0; i < totalNum/maxSize; i++){
+            groupSizes.push(maxSize);
+        }
+        return groupSizes;
+    }
+    if (maxSize > Math.ceil(totalNum/2)){
+        throw new Error("This group size doesn't give fair groups!"); 
+    }
+    
+    for (let i = 1; i <= totalNum/maxSize; i++){
+        for (let j = 1; j <= (totalNum - maxSize*i)/smallerSize; j++){
+            if (totalNum - maxSize*i !== smallerSize*j){
+                throw new Error("This group size doesn't give fair groups!");
+            }
+        }
+    }
+
     while (totalNum >= (maxSize + smallerSize)){
         groupSizes.push(maxSize);
         totalNum -= maxSize;
@@ -25,36 +44,21 @@ function sizeGroups(totalNum, maxSize){
     return groupSizes;
 }
 
-function readNames(){
-    let process = require('process');
-    let fs = require('fs');
-
-    let fileName = process.argv[2];
-    if (!fs.existsSync(fileName)){
-        console.log(`Error: your file doesn't exist, I received ${fileName}`);
-        process.exit();
-    }
-
-    let contents = fs.readFileSync(fileName, 'utf-8');
-
-    const nameList = contents.split('\n');
-
-    return nameList;
-}
-
-
 
 let shuffle = require('./shuffle');
 let randomizer = require('./randomizer');
+let readNames = require('./readNames');
 
 
 let totalNum = readNames().length;
+let namesRandom = shuffle(readNames());
 let maxSize = randomizer();
 let groupSizes = sizeGroups(totalNum, maxSize);
-let namesRandom = shuffle(readNames());
 let groups = groupify(namesRandom, groupSizes);
 
+console.log("\nGenerating groups...\n");
 for (let i = 0; i < groups.length; i++) {
     let label = `Group ${i + 1}`;
     console.log(`${label}: ${groups[i]}`);
+    console.log();
 }

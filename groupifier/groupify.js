@@ -53,8 +53,6 @@ let maxSize = randomizer();
 let groupSizes = sizeGroups(totalNum, maxSize);
 let namesRandom = shuffle(readNames());
 let groups = groupify(namesRandom, groupSizes);
-console.log(groups);
-console.log(groupSizes);
 
 for (let i = 0; i < groups.length; i++) {
     let label = `Group ${i + 1}`;

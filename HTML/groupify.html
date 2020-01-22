@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <h1>Let's Groupify!</h1>
+        <h3>Sponsored by Chloe deBeus, Lily Korir, and Will Smith</h3>
+        <br>
+        Max group size? 
+        <br>
+        <script>
+            function createNumInput(){
+                let input = document.createElement("INPUT");
+                input.setAttribute("type", "number");
+                input.setAttribute("value", "0");
+                document.body.appendChild(input);
+            }
+            createNumInput();
+        </script>
+
+        Please upload file with all names:
+        <br>
+        <script>
+            let fileInput = $('#files');
+            let uploadButton = $('#upload');
+
+            uploadButton.on('click', function(){
+                let input = fileInput.get(0);
+                let reader = new FileReader();
+                if (input.files.length){
+                    let textFile = input.files[0];
+                    reader.readAsText(textFile);
+                }
+            })
+            
+        </script>
+
+
+
+    </body>
+</html>

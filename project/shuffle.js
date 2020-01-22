@@ -19,9 +19,13 @@ function shuffle(array) {
     }
   
     return array;
-  }
+}
   // Used like so
-  var arr = ['Shaah Cooper',
+  
+
+  if (require.main === module){
+
+    var arr = ['Shaah Cooper',
     'Chloe deBeus',
     'Lily Korir',
     'Christos Koumpotis',
@@ -36,3 +40,6 @@ function shuffle(array) {
     'Jaelyn Taylor',
     'Jason Zheng'];
   console.log(shuffle(arr));
+  }
+  
+  module.exports = shuffle

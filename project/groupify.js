@@ -25,21 +25,38 @@ function sizeGroups(totalNum, maxSize){
     return groupSizes;
 }
 
-// console.log(sizeGroups(14,4));
-// console.log(sizeGroups(14,3));
-// console.log(sizeGroups(5,3));
-// console.log(sizeGroups(13,2));
+function readNames(){
+    let process = require('process');
+    let fs = require('fs');
 
-function printGroups(groups) {
-    for (let group of groups) {
-        console.log(group);
+    let fileName = process.argv[2];
+    if (!fs.existsSync(fileName)){
+        console.log(`Error: your file doesn't exist, I received ${fileName}`);
+        process.exit();
     }
+
+    let contents = fs.readFileSync(fileName, 'utf-8');
+
+    const nameList = contents.split('\n');
+
+    return nameList;
 }
 
-let groupSizes = sizeGroups(7,3);
-let groups = groupify([1,2,3,4,5,6,7], groupSizes);
+
+
+let shuffle = require('./shuffle');
+let randomizer = require('./randomizer');
+
+
+let totalNum = readNames().length;
+let maxSize = randomizer();
+let groupSizes = sizeGroups(totalNum, maxSize);
+let namesRandom = shuffle(readNames());
+let groups = groupify(namesRandom, groupSizes);
 
 for (let i = 0; i < groups.length; i++) {
     let label = `Group ${i + 1}`;
     console.log(`${label}. ${groups[i]}`);
 }
+
+randomizer();

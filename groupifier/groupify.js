@@ -22,13 +22,13 @@ function sizeGroups(totalNum, maxSize){
         return groupSizes;
     }
     if (maxSize > Math.ceil(totalNum/2)){
-        throw new Error("This group size doesn't give fair groups!"); 
+        throw new Error("This group size doesn't give reasonable groups!"); 
     }
     
     for (let i = 1; i <= totalNum/maxSize; i++){
         for (let j = 1; j <= (totalNum - maxSize*i)/smallerSize; j++){
             if (totalNum - maxSize*i !== smallerSize*j){
-                throw new Error("This group size doesn't give fair groups!");
+                throw new Error("This group size doesn't give reasonable groups!");
             }
         }
     }

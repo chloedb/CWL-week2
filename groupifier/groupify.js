@@ -11,7 +11,6 @@ function groupify(randomizedArray, groupSizes){
     return allGroups;
 }
 
-// Note - we need to work on this function more, to proof for situations that don't work (e.g. 6, num > 7 for 14);
 function sizeGroups(totalNum, maxSize){
     let smallerSize = maxSize - 1;
     const groupSizes = [];  

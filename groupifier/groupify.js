@@ -24,13 +24,6 @@ function sizeGroups(totalNum, maxSize){
         throw new Error("This group size doesn't give reasonable groups!"); 
     }
     
-    for (let i = 1; i <= totalNum/maxSize; i++){
-        for (let j = 1; j <= (totalNum - maxSize*i)/smallerSize; j++){
-            if (totalNum - maxSize*i !== smallerSize*j){
-                throw new Error("This group size doesn't give reasonable groups!");
-            }
-        }
-    }
 
     while (totalNum >= (maxSize + smallerSize)){
         groupSizes.push(maxSize);

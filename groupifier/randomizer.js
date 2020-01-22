@@ -1,6 +1,6 @@
 function randomizer() {
     const readlineSync = require('readline-sync');
-    let maxGroupSize = readlineSync.question('Max group size?');
+    let maxGroupSize = Number(readlineSync.question('Max group size? '));
     return maxGroupSize;
 }
 

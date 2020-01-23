@@ -11,8 +11,6 @@ For example, if we pass in the list of our 14 names, and ask for a maximum of 4 
 2. You will be prompted to enter a **maximum group size**. Type an *integer* and hit Enter.
 
 
-
-
 *Note: running this program requires the readline-sync module*
 
 

@@ -1,3 +1,6 @@
+/* Define function to build groups, given a randomized array of names
+      and an array of determined group sizes. */
+
 function groupify(randomizedArray, groupSizes){
     const allGroups = [];
     
@@ -11,6 +14,9 @@ function groupify(randomizedArray, groupSizes){
     return allGroups;
 }
 
+
+/* Define a function to return an optimized array of group sizes, gven 
+    the total number of people, and a max group size.  */
 function sizeGroups(totalNum, maxSize){
     let smallerSize = maxSize - 1;
     const groupSizes = [];  
@@ -29,7 +35,7 @@ function sizeGroups(totalNum, maxSize){
     }
     */
     
-    const works = [];
+    // const works = [];
     /*
     for (let i = 1; i <= totalNum/maxSize; i++){
         workingNum -= maxSize;
@@ -40,6 +46,8 @@ function sizeGroups(totalNum, maxSize){
         }
     }
     */
+
+    // Algorithm to determine feasibility of given max group size, and return array of group sizes.
     let workingNum = totalNum;
     for (let i = Math.floor(totalNum/maxSize); i > 0; i--){
         workingNum = totalNum - maxSize*i;
@@ -87,9 +95,9 @@ function sizeGroups(totalNum, maxSize){
 }
 
 
-let shuffle = require('./shuffle');
-let getMaxSize = require('./getMaxSize');
-let readNames = require('./readNames');
+let shuffle = require('./shuffle'); //accepts the file you put in the command line and randomizes it
+let getMaxSize = require('./getMaxSize'); //creates the command prompt
+let readNames = require('./readNames'); //creates command line argument into an array
 
 
 let totalNum = readNames().length;
@@ -97,6 +105,10 @@ let namesRandom = shuffle(readNames());
 let maxSize = getMaxSize();
 let groupSizes = sizeGroups(totalNum, maxSize);
 let groups = groupify(namesRandom, groupSizes);
+
+//Above, we implemented the other files that we collaborated with in the beginning
+//GitHub can be a great resource in the process of combining files in this manner, but
+    //it ultimately has to do with the fact they are in the same directory
 
 console.log(`\n  Generating ${groups.length} random groups...\n`);
 for (let i = 0; i < groups.length; i++) {

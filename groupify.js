@@ -98,9 +98,9 @@ let maxSize = randomizer();
 let groupSizes = sizeGroups(totalNum, maxSize);
 let groups = groupify(namesRandom, groupSizes);
 
-console.log(`\nGenerating ${groups.length} random groups...\n`);
+console.log(`\n  Generating ${groups.length} random groups...\n`);
 for (let i = 0; i < groups.length; i++) {
-    let label = `Group ${i + 1}`;
+    let label = `  Group ${i + 1}`;
     console.log(`${label}: ${groups[i]}`);
     console.log();
 }

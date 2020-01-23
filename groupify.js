@@ -88,13 +88,13 @@ function sizeGroups(totalNum, maxSize){
 
 
 let shuffle = require('./shuffle');
-let randomizer = require('./randomizer');
+let getMaxSize = require('./getMaxSize');
 let readNames = require('./readNames');
 
 
 let totalNum = readNames().length;
 let namesRandom = shuffle(readNames());
-let maxSize = randomizer();
+let maxSize = getMaxSize();
 let groupSizes = sizeGroups(totalNum, maxSize);
 let groups = groupify(namesRandom, groupSizes);
 

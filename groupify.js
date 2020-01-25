@@ -81,7 +81,6 @@ let totalNum = readNames().length;
 let namesRandom = shuffle(readNames());
 
 let interactiveInput = getMaxSize();
-console.log(interactiveInput);
 if (interactiveInput[0] === 'maxGroupSize'){
     let maxSize = interactiveInput[1];
     groupSizes = sizeGroups(totalNum,maxSize);

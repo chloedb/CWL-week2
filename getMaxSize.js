@@ -1,14 +1,18 @@
 function getMaxSize() {
-    let readlineSync = require('readline-sync');
-    console.log('  Group by:');
-    console.log('  (1) Number of groups');
-    console.log('  (2) Max group size');
-    let option = readlineSync.questionInt('  Choose an option (1 or 2): ');
-    if (![1,2].includes(option)){
-        
+    
+    console.log('  Group by:')
+    let readlineSync = require('readline-sync'),
+        options = ['Max group size', 'Number of groups'],
+        choice = readlineSync.keyInSelect(options, 'Choose an option: ');
+    
+    readlineSync = require('readline-sync');
+    if (choice === 1){
+        let numGroups = readlineSync.question('  How many groups? ');
+        return numGroups;
+    } else {
+        let maxGroupSize = Number(readlineSync.question('  Max group size? '));
+        return maxGroupSize;
     }
-    let maxGroupSize = Number(readlineSync.question('  Max group size? '));
-    return maxGroupSize;
 }
 
 if (require.main === module) {

@@ -5,7 +5,6 @@ function getMaxSize() {
         options = ['Max group size', 'Number of groups'],
         choice = readlineSync.keyInSelect(options, 'Choose an option: ');
     
-    readlineSync = require('readline-sync');
     if (choice === 1){
         let numGroups = Number(readlineSync.question('  How many groups? '));
         return ['numGroups',numGroups];

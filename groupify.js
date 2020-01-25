@@ -49,11 +49,27 @@ function sizeGroups2(totalNum,numGroups){
         return groupSizes;
     }
 
-    
+    let workingNum = totalNum;
+    let maxPossibleSize = Math.ceil(totalNum/numGroups);
+    let smallerPossibleSize = maxPossibleSize - 1;
+    if (smallerPossibleSize < 2){
+        throw new Error("This number of groups isn't reasonable!");
+    }
+    for (let i = Math.floor(totalNum/maxPossibleSize); i > 0; i--){
+        workingNum = totalNum - maxPossibleSize*i;
+        if (workingNum % smallerPossibleSize === 0 && i + workingNum/smallerPossibleSize === numGroups){
+            for (let j = 0; j < i; j++){
+                groupSizes.push(maxPossibleSize);
+            }
+            while (workingNum > 0){
+                groupSizes.push(smallerPossibleSize);
+                workingNum -= smallerPossibleSize;
+            }
+            return groupSizes;
+        }
+    }
+    throw new Error("This number of groups isn't reasonable!");   
 }
-console.log(sizeGroups2(14,5));
-console.log(sizeGroups2(15,5));
-console.log(sizeGroups2(14,6));
 
 
 let shuffle = require('./shuffle'); //accepts the file you put in the command line and randomizes it
@@ -64,14 +80,17 @@ let readNames = require('./readNames'); //creates command line argument into an 
 let totalNum = readNames().length;
 let namesRandom = shuffle(readNames());
 
-if (getMaxSize()[0] === 'maxGroupSize'){
-    let maxSize = getMaxSize()[1];
-    let groupSizes = sizeGroups(totalNum,maxSize);
+let interactiveInput = getMaxSize();
+console.log(interactiveInput);
+if (interactiveInput[0] === 'maxGroupSize'){
+    let maxSize = interactiveInput[1];
+    groupSizes = sizeGroups(totalNum,maxSize);
 }
-if (getMaxSize()[0] === 'numGroups'){
-    let numGroups = getMaxSize()[1];
-    let groupSizes = sizeGroups(totalNum, numGroups);
+if (interactiveInput[0] === 'numGroups'){
+    let numGroups = interactiveInput[1];
+    groupSizes = sizeGroups2(totalNum,numGroups);
 }
+
 
 let groups = groupify(namesRandom, groupSizes);
 

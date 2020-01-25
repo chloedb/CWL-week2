@@ -20,32 +20,7 @@ function groupify(randomizedArray, groupSizes){
 function sizeGroups(totalNum, maxSize){
     let smallerSize = maxSize - 1;
     const groupSizes = [];  
-    /*
-    if (totalNum % maxSize === 0){
-        for (let i = 0; i < totalNum/maxSize; i++){
-            groupSizes.push(maxSize);
-        }
-        return groupSizes;
-    }
-    */
-
-    /*
-    if (maxSize > Math.ceil(totalNum/2)){
-        throw new Error("This group size doesn't give reasonable groups!"); 
-    }
-    */
     
-    // const works = [];
-    /*
-    for (let i = 1; i <= totalNum/maxSize; i++){
-        workingNum -= maxSize;
-        if (workingNum % smallerSize === 0){
-            works.push(true);
-        } else {
-            works.push(false);
-        }
-    }
-    */
 
     // Algorithm to determine feasibility of given max group size, and return array of group sizes.
     let workingNum = totalNum;
@@ -63,35 +38,37 @@ function sizeGroups(totalNum, maxSize){
         }
     }
     throw new Error("This group size doesn't give reasonable groups!");
+}
 
+function sizeGroups2(totalNum,numGroups){
+    let groupSizes = [];
+    if (totalNum % numGroups === 0){
+        for (let i = 0; i < numGroups; i++){
+            groupSizes.push(totalNum/numGroups);
+        }
+        return groupSizes;
+    }
 
-    /*
-    console.log(works);
-    if (!works.includes(true)){
-        throw new Error("This group size doesn't give reasonable groups!");
+    let workingNum = totalNum;
+    let maxPossibleSize = Math.ceil(totalNum/numGroups);
+    let smallerPossibleSize = maxPossibleSize - 1;
+    if (smallerPossibleSize < 2){
+        throw new Error("This number of groups isn't reasonable!");
     }
-    workingNum = totalNum;
-    for (let i = 0; i <= works.lastIndexOf(true); i++){
-        groupSizes.push(maxSize);
-        workingNum -= maxSize;
+    for (let i = Math.floor(totalNum/maxPossibleSize); i > 0; i--){
+        workingNum = totalNum - maxPossibleSize*i;
+        if (workingNum % smallerPossibleSize === 0 && i + workingNum/smallerPossibleSize === numGroups){
+            for (let j = 0; j < i; j++){
+                groupSizes.push(maxPossibleSize);
+            }
+            while (workingNum > 0){
+                groupSizes.push(smallerPossibleSize);
+                workingNum -= smallerPossibleSize;
+            }
+            return groupSizes;
+        }
     }
-    while (workingNum > 0){
-        groupSizes.push(smallerSize);
-        workingNum -= smallerSize;
-    }
-    return groupSizes;    
-    */
-    /*
-    while (totalNum >= (maxSize + smallerSize)){
-        groupSizes.push(maxSize);
-        totalNum -= maxSize;  
-    }
-    while (totalNum > 0){
-        groupSizes.push(smallerSize);
-        totalNum -= smallerSize;
-    }
-    return groupSizes;
-    */
+    throw new Error("This number of groups isn't reasonable!");   
 }
 
 
@@ -102,8 +79,18 @@ let readNames = require('./readNames'); //creates command line argument into an 
 
 let totalNum = readNames().length;
 let namesRandom = shuffle(readNames());
-let maxSize = getMaxSize();
-let groupSizes = sizeGroups(totalNum, maxSize);
+
+let interactiveInput = getMaxSize();
+if (interactiveInput[0] === 'maxGroupSize'){
+    let maxSize = interactiveInput[1];
+    groupSizes = sizeGroups(totalNum,maxSize);
+}
+if (interactiveInput[0] === 'numGroups'){
+    let numGroups = interactiveInput[1];
+    groupSizes = sizeGroups2(totalNum,numGroups);
+}
+
+
 let groups = groupify(namesRandom, groupSizes);
 
 //Above, we implemented the other files that we collaborated with in the beginning

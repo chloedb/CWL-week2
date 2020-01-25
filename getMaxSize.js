@@ -8,10 +8,10 @@ function getMaxSize() {
     readlineSync = require('readline-sync');
     if (choice === 1){
         let numGroups = Number(readlineSync.question('  How many groups? '));
-        return numGroups;
+        return ['numGroups',numGroups];
     } else {
         let maxGroupSize = Number(readlineSync.question('  Max group size? '));
-        return maxGroupSize;
+        return ['maxGroupSize',maxGroupSize];
     }
 }
 

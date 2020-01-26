@@ -1,5 +1,6 @@
 function getMaxSize() {
     
+    console.log('');
     console.log('  Group by:')
     let readlineSync = require('readline-sync'),
         options = ['Max group size', 'Number of groups'],
